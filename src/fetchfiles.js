@@ -14,3 +14,11 @@ export function fetchFiles(source) {
 		return res.json();
 	});
 }
+
+export function fetchTimeline(file) {
+	if(file == "") file = "fib.c";
+	return fetch("http://localhost:3000/timeline?file="+encodeURIComponent(file))
+	.then(res => {
+		return res.json();
+	});
+}

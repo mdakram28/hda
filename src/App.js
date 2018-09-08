@@ -23,7 +23,7 @@ import SimpleLineChart from "./SimpleLineChart";
 import Button from "@material-ui/core/Button";
 //import CodeView from './CodeView';
 // import Websocket from "react-websocket";
-import CodeView from "./CodeView";
+import CodeView from "./codeviewer/CodeView";
 
 import { fetchFiles, fetchSources } from "./fetchfiles";
 

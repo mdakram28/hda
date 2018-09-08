@@ -1,7 +1,8 @@
 import React from "react";
 import { Style } from "react";
+import CodeView from "./CodeView";
 
-class CodeView extends React.Component {
+class LiveCodeView extends React.Component {
   state = {
     data: {
       lines: []
@@ -27,16 +28,6 @@ class CodeView extends React.Component {
     }
   }
 
-  format_count(count) {
-    if (count == "-") count = "";
-    else if (count == "#####") count = "";
-    return count;
-  }
-
-  format_code(code) {
-    return code;
-  }
-
   constructor(props) {
     super(props);
     this.ws = new WebSocket("ws://localhost:3001/");
@@ -47,19 +38,12 @@ class CodeView extends React.Component {
 
   render() {
     return (
-      <table class="code-view">
-        {this.state.data.lines.map((line, index) => (
-          <tr>
-            <td class="count">{this.format_count(line.count)}</td>
-            <td class="lineno">{index + 1}</td>
-            <td class="code">
-              <pre>{this.format_code(line.code)}</pre>
-            </td>
-          </tr>
-        ))}
-      </table>
+      <div>
+		{/* Live Code View controls */}
+        <CodeView stats={this.state.data} />
+      </div>
     );
   }
 }
 
-export default CodeView;
+export default LiveCodeView;

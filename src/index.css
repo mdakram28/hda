@@ -29,5 +29,10 @@ body {
 }
 
 .code-view .code {
+	text-align: left;
 	padding-left: 20px;
+}
+
+.code-view th {
+	border-bottom:  1px dotted grey;
 }
