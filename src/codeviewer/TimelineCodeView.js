@@ -13,9 +13,7 @@ class TimelineCodeView extends React.Component {
     },
     timeline: {},
     timelineKeys: [],
-    value: 0,
-    percent: 0,
-    color: "#3FC7FA"
+    value: 0
   };
 
   getTimeline() {
@@ -45,18 +43,8 @@ class TimelineCodeView extends React.Component {
 
   render() {
     var date = new Date(parseInt(this.state.timelineKeys[this.state.value]));
-    const containerStyle = {
-      width: "250px"
-    };
     return (
       <div>
-        <div style={containerStyle}>
-          <Line
-            percent={this.state.percent}
-            strokeWidth="4"
-            strokeColor={this.state.color}
-          />
-        </div>
         <Slider
           value={this.state.value}
           min={0}

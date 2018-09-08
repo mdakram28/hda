@@ -6,9 +6,7 @@ import { Line } from 'rc-progress';
 
 class LiveCodeView extends React.Component {
   state = {
-    data: {
-      lines: []
-    },
+    data: null,
     percent: 0,
     color: '#3FC7FA',
   };
@@ -44,6 +42,9 @@ class LiveCodeView extends React.Component {
   // });
 
   render() {
+	  const containerStyle = {
+		  width: "250px"
+	  }
     return (
       <div>
         <div style={containerStyle}>
