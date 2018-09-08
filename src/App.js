@@ -113,7 +113,8 @@ class App extends React.Component {
   ;
   constructor(props) {
     super(props);
-    this.state = {CodeView:"Hello world"};
+    this.state = {CodeView:"Hello world",
+  divState:true};
   }
 
 
@@ -129,10 +130,34 @@ class App extends React.Component {
     let result = JSON.parse(code);
     this.setState({CodeView:code});
   }
+  display()
+  {
+    alert("Will be done soon");
+  }
+
+  changeView()
+  {
+    if(this.state==true)
+    this.setState({divState:false});
+    else
+    this.setState({divState:true})
+  }
 
   render() {
+    var file_list=[];
     const { classes } = this.props;
+    for(let i=1;i<4;i++)
+    {
+    file_list.push(
+      <ListItem button key={ i } >
+      <ListItemIcon onClick={this.display}>
+        <DashboardIcon />
+      </ListItemIcon>
+      <ListItemText primary="File1" />
+      </ListItem>
 
+    );
+  }
     return (
       <React.Fragment>
         <CssBaseline />
@@ -174,40 +199,7 @@ class App extends React.Component {
             </div>
             <Divider />
 			<List>
-			<ListItem button>
-				<ListItemIcon>
-					<DashboardIcon />
-				</ListItemIcon>
-				<ListItemText primary="File1" />
-				</ListItem>
-
-        <ListItem button>
-				<ListItemIcon>
-					<DashboardIcon />
-				</ListItemIcon>
-				<ListItemText primary="File2" />
-				</ListItem>
-
-        <ListItem button>
-				<ListItemIcon>
-					<DashboardIcon />
-				</ListItemIcon>
-				<ListItemText primary="File0" />
-				</ListItem>
-
-        <ListItem button>
-				<ListItemIcon>
-					<DashboardIcon />
-				</ListItemIcon>
-				<ListItemText primary="File3" />
-				</ListItem>
-
-        <ListItem button>
-				<ListItemIcon>
-					<DashboardIcon />
-				</ListItemIcon>
-				<ListItemText primary="File4" />
-				</ListItem>
+			{file_list}
 			
 			</List>
             {/* <List>{mainListItems}</List> */}
@@ -229,6 +221,10 @@ class App extends React.Component {
             </Typography>
             <Typography component="div" className={classes.chartContainer}>
               <SimpleLineChart />
+              <Websocket url='ws://localhost:8888/live/product/12345/'
+              onMessage={this.handleCode.bind(this)}/>
+             <pre>{this.state.CodeView}</pre>
+
             </Typography>
             <Typography variant="display1" gutterBottom>
               Lines of Code Executed
