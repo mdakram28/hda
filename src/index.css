@@ -3,3 +3,31 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+.code-view *{
+  font-family: "Courier New", Courier, monospace;
+}
+
+.code-view {
+	margin: 20px;
+}
+
+.code-view pre {
+  padding: 0;
+  margin: 0;
+}
+
+.code-view .count, .code-view .lineno{
+	text-align: right;
+	padding-left: 40px;
+	padding-right: 20px;
+	border-right: 1px dotted grey;
+}
+
+.code-view .lineno {
+	color: grey;
+}
+
+.code-view .code {
+	padding-left: 20px;
+}
