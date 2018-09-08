@@ -4,6 +4,8 @@ import CodeView from "./CodeView";
 import Slider from "@material-ui/lab/Slider";
 import { withStyles } from "@material-ui/core/styles";
 import { fetchTimeline } from "../fetchfiles";
+import Moment from 'moment';
+
 
 class TimelineCodeView extends React.Component {
   state = {
@@ -23,7 +25,7 @@ class TimelineCodeView extends React.Component {
   }
 
   handleChange(event, value) {
-	  console.log("timeline...", this.state.timeline[this.state.timelineKeys[value]]);
+	//   console.log("timeline...", this.state.timeline[this.state.timelineKeys[value]]);
     this.setState({
       value: value,
       data: this.state.timeline[this.state.timelineKeys[value]]
@@ -46,7 +48,7 @@ class TimelineCodeView extends React.Component {
           step={1}
           onChange={this.handleChange}
         />
-        At time : {this.state.timelineKeys[this.state.value]}
+        At time : {Moment(this.state.timelineKeys[this.state.value]).format('yyyy-MM-dd HH:mm:ss.SSS')}
         <CodeView stats={this.state.data} />
       </div>
     );
