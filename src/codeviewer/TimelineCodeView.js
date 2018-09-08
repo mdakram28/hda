@@ -4,8 +4,7 @@ import CodeView from "./CodeView";
 import Slider from "@material-ui/lab/Slider";
 import { withStyles } from "@material-ui/core/styles";
 import { fetchTimeline } from "../fetchfiles";
-import Moment from 'moment';
-
+import Moment from "moment";
 
 class TimelineCodeView extends React.Component {
   state = {
@@ -15,7 +14,8 @@ class TimelineCodeView extends React.Component {
     timeline: {},
     timelineKeys: [],
     value: 0,
-  
+    percent: 0,
+    color: "#3FC7FA"
   };
 
   getTimeline() {
@@ -26,7 +26,7 @@ class TimelineCodeView extends React.Component {
   }
 
   handleChange(event, value) {
-	//   console.log("timeline...", this.state.timeline[this.state.timelineKeys[value]]);
+    //   console.log("timeline...", this.state.timeline[this.state.timelineKeys[value]]);
     this.setState({
       value: value,
       data: this.state.timeline[this.state.timelineKeys[value]]
@@ -40,11 +40,19 @@ class TimelineCodeView extends React.Component {
   }
 
   render() {
+    var date = new Date(parseInt(this.state.timelineKeys[this.state.value]));
     const containerStyle = {
-      width: '250px',
+      width: "250px"
     };
     return (
       <div>
+        <div style={containerStyle}>
+          <Line
+            percent={this.state.percent}
+            strokeWidth="4"
+            strokeColor={this.state.color}
+          />
+        </div>
         <Slider
           value={this.state.value}
           min={0}
@@ -52,7 +60,7 @@ class TimelineCodeView extends React.Component {
           step={1}
           onChange={this.handleChange}
         />
-        At time : {Moment(this.state.timelineKeys[this.state.value]).format('yyyy-MM-dd HH:mm:ss.SSS')}
+        Time : {Moment(date).format("YYYY-MM-ddd HH:mm:ss.SSS")}
         <CodeView stats={this.state.data} />
       </div>
     );
