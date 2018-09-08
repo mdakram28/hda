@@ -39,6 +39,7 @@ class TimelineCodeView extends React.Component {
   }
 
   render() {
+	  var date = new Date(parseInt(this.state.timelineKeys[this.state.value]));
     return (
       <div>
         <Slider
@@ -48,7 +49,7 @@ class TimelineCodeView extends React.Component {
           step={1}
           onChange={this.handleChange}
         />
-        At time : {Moment(this.state.timelineKeys[this.state.value]).format('yyyy-MM-dd HH:mm:ss.SSS')}
+        Time : {Moment(date).format('YYYY-MM-ddd HH:mm:ss.SSS')}
         <CodeView stats={this.state.data} />
       </div>
     );
