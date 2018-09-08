@@ -20,7 +20,9 @@ import ListItemText from '@material-ui/core/ListItemText';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import SimpleLineChart from './SimpleLineChart';
 import Button from '@material-ui/core/Button';
-import CodeView from './CodeView';
+//import CodeView from './CodeView';
+import Websocket from 'react-websocket';
+ 
 const drawerWidth = 240;
 
 const styles = theme => ({
@@ -106,6 +108,7 @@ const styles = theme => ({
 class App extends React.Component {
   state = {
     open: true,
+    CodeView:"Hello"
   };
 
   handleDrawerOpen = () => {
@@ -115,6 +118,11 @@ class App extends React.Component {
   handleDrawerClose = () => {
     this.setState({ open: false });
   };
+
+  handleCode(code) {
+    let result = JSON.parse(code);
+    this.setState({CodeView:code});
+  }
 
   render() {
     const { classes } = this.props;
@@ -204,13 +212,13 @@ class App extends React.Component {
             <div className={classes.appBarSpacer} />
             <Typography variant="display1" gutterRight>
             <Button variant="contained" color="primary" className={classes.button}>
-        Secondary
+        CodeView
       </Button>
       <Button variant="contained" color="primary" className={classes.button}>
-        Secondary
+        Memory UsageS
       </Button>
       <Button variant="contained" color="primary" className={classes.button}>
-        Secondary
+       Overview
       </Button>
             </Typography>
             <Typography component="div" className={classes.chartContainer}>
@@ -220,7 +228,10 @@ class App extends React.Component {
               Lines of Code Executed
             </Typography>
              <div className={classes.tableContainer}>
-              <CodeView />
+             <Websocket url='ws://localhost:8888/live/product/12345/'
+              onMessage={this.handleCode.bind(this)}/>
+                <p>My mother has <span style="color:blue;font-weight:bold">blue</span> {this.CodeView} <span style="color:darkolivegreen;font-weight:bold">dark green</span> eyes.</p>
+
             </div> 
           </main>
         </div>

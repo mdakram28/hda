@@ -10,6 +10,7 @@
     "react-autosize-textarea": "^4.0.0",
     "react-dom": "^16.5.0",
     "react-scripts": "1.1.5",
+    "react-websocket": "^2.0.0",
     "rechart": "^0.0.1",
     "recharts": "^1.2.0"
   },
