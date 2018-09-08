@@ -28,6 +28,14 @@ body {
 	color: grey;
 }
 
+.code-view tr.red {
+	background-color: #992222;
+}
+
+.code-view tr.red {
+	background-color: #229922;
+}
+
 .code-view .code {
 	text-align: left;
 	padding-left: 20px;

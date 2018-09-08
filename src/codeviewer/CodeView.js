@@ -4,8 +4,14 @@ import { Style } from "react";
 class CodeView extends React.Component {
 
   format_count(count) {
-    if (count == "-") count = "";
-    else if (count == "#####") count = "";
+    if (count == "-")
+     count = "";
+    else if (count == "#####") 
+    {
+      count = "";
+      // this.refs.code-view.style.color = "red"; 
+
+    }
     return count;
   }
 
@@ -26,7 +32,7 @@ class CodeView extends React.Component {
           <th class="code">Lines of Code</th>
         </tr>
         {this.props.stats.lines.map((line, index) => (
-          <tr>
+          <tr className={line.count=="#####"? "red" : (line.count=="-" ? "" : "green")}>
             <td class="lineno">{index + 1}</td>
             <td class="count">{this.format_count(line.count)}</td>
             <td class="code">
