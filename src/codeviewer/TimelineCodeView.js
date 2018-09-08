@@ -12,18 +12,20 @@ class TimelineCodeView extends React.Component {
     },
     timeline: {},
     timelineKeys: [],
-    value: 0
+    value: 0,
+    percent: 0,
+    color: '#3FC7FA',
   };
 
   getTimeline() {
     fetchTimeline(this.props.file).then(res => {
-		console.log(res);
+      console.log(res);
       this.setState({ timeline: res, timelineKeys: Object.keys(res) });
     });
   }
 
   handleChange(event, value) {
-	  console.log("timeline...", this.state.timeline[this.state.timelineKeys[value]]);
+    console.log("timeline...", this.state.timeline[this.state.timelineKeys[value]]);
     this.setState({
       value: value,
       data: this.state.timeline[this.state.timelineKeys[value]]
@@ -31,14 +33,20 @@ class TimelineCodeView extends React.Component {
   }
 
   constructor(props) {
-	super(props); // file
-	this.handleChange = this.handleChange.bind(this);
+    super(props); // file
+    this.handleChange = this.handleChange.bind(this);
     this.getTimeline();
   }
 
   render() {
+    const containerStyle = {
+      width: '250px',
+    };
     return (
       <div>
+        <div style={containerStyle}>
+          <Line percent={this.state.percent} strokeWidth="4" strokeColor={this.state.color} />
+        </div>
         <Slider
           value={this.state.value}
           min={0}
