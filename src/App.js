@@ -10,19 +10,16 @@ import List from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
-import Badge from '@material-ui/core/Badge';
+//import Badge from '@material-ui/core/Badge';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import NotificationsIcon from '@material-ui/icons/Notifications';
-// import ListItem from '@material-ui/core';
+//import NotificationsIcon from '@material-ui/icons/Notifications';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import DashboardIcon from '@material-ui/icons/Dashboard';
-// import { mainListItems, secondaryListItems } from './listItems';
-// import SimpleLineChart from './SimpleLineChart';
-// import SimpleTable from './SimpleTable';
-
+import SimpleLineChart from './SimpleLineChart';
+import Button from '@material-ui/core/Button';
 const drawerWidth = 240;
 
 const styles = theme => ({
@@ -45,6 +42,12 @@ const styles = theme => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
+  },
+  button: {
+    margin: theme.spacing.unit,
+  },
+  input: {
+    display: 'none',
   },
   appBarShift: {
     marginLeft: drawerWidth,
@@ -135,14 +138,11 @@ class App extends React.Component {
               >
                 <MenuIcon />
               </IconButton>
-              <Typography variant="title" color="inherit" noWrap className={classes.title}>
-                Dashboard
-              </Typography>
-              <IconButton color="inherit">
-                <Badge badgeContent={4} color="secondary">
-                  <NotificationsIcon />
-                </Badge>
-              </IconButton>
+              {/* <Typography variant="title" color="inherit" noWrap className={classes.title}>
+                Basic
+              </Typography> */}
+              <div>
+                </div>
             </Toolbar>
           </AppBar>
           <Drawer
@@ -163,8 +163,37 @@ class App extends React.Component {
 				<ListItemIcon>
 					<DashboardIcon />
 				</ListItemIcon>
-				<ListItemText primary="Dashboard" />
+				<ListItemText primary="File1" />
 				</ListItem>
+
+        <ListItem button>
+				<ListItemIcon>
+					<DashboardIcon />
+				</ListItemIcon>
+				<ListItemText primary="File2" />
+				</ListItem>
+
+        <ListItem button>
+				<ListItemIcon>
+					<DashboardIcon />
+				</ListItemIcon>
+				<ListItemText primary="File0" />
+				</ListItem>
+
+        <ListItem button>
+				<ListItemIcon>
+					<DashboardIcon />
+				</ListItemIcon>
+				<ListItemText primary="File3" />
+				</ListItem>
+
+        <ListItem button>
+				<ListItemIcon>
+					<DashboardIcon />
+				</ListItemIcon>
+				<ListItemText primary="File4" />
+				</ListItem>
+			
 			</List>
             {/* <List>{mainListItems}</List> */}
             <Divider />
@@ -172,18 +201,26 @@ class App extends React.Component {
           </Drawer>
           <main className={classes.content}>
             <div className={classes.appBarSpacer} />
-            <Typography variant="display1" gutterBottom>
-              Orders
+            <Typography variant="display1" gutterRight>
+            <Button variant="contained" color="primary" className={classes.button}>
+        Secondary
+      </Button>
+      <Button variant="contained" color="primary" className={classes.button}>
+        Secondary
+      </Button>
+      <Button variant="contained" color="primary" className={classes.button}>
+        Secondary
+      </Button>
             </Typography>
             <Typography component="div" className={classes.chartContainer}>
-              {/* <SimpleLineChart /> */}
+              <SimpleLineChart />
             </Typography>
             <Typography variant="display1" gutterBottom>
-              Products
+              Lines of Code Executed
             </Typography>
-            <div className={classes.tableContainer}>
-              {/* <SimpleTable /> */}
-            </div>
+            {/* <div className={classes.tableContainer}>
+              <SimpleTable />
+            </div> */}
           </main>
         </div>
       </React.Fragment>
