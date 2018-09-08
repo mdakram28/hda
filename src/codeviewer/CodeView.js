@@ -1,6 +1,6 @@
 import React from "react";
 import { Style } from "react";
-import {Line} from "rc-progress";
+import { Line } from "rc-progress";
 
 class CodeView extends React.Component {
 
@@ -25,10 +25,12 @@ class CodeView extends React.Component {
     if (!this.props.stats) return <span>Loading...</span>;
     const containerStyle = {
       width: "250px"
-	};	
-	console.log(this.props.stats, this.props.stats.source);
+    };
+    console.log(this.props.stats, this.props.stats.source);
     return (
       <div>
+        <div class="progress">Progress</div>
+        <br/>
         <div style={containerStyle}>
           <Line
             percent={this.props.stats.progress[this.props.stats.source].percent}

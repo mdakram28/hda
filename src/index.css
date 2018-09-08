@@ -8,6 +8,10 @@ body {
   font-family: "Courier New", Courier, monospace;
 }
 
+.progress{
+	font-family: "Courier New", Courier, monospace;
+	font-size: 28,
+}
 .code-view {
 	margin: 20px;
 	width: 100%;

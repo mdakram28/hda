@@ -243,10 +243,6 @@ class App extends React.Component {
               <SimpleLineChart />
             </Typography>
 			  <LiveCodeView file={this.state.selected_file} />
-			  {/* <TimelineCodeView file={this.state.selected_file} /> */}
-            <Typography variant="display1" gutterBottom>
-              Lines of Code Executed
-            </Typography>
           </main>
         </div>
       </React.Fragment>
