@@ -10,6 +10,7 @@ body {
 
 .code-view {
 	margin: 20px;
+	width: 100%;
 }
 
 .code-view pre {
@@ -19,9 +20,10 @@ body {
 
 .code-view .count, .code-view .lineno{
 	text-align: right;
-	padding-left: 40px;
+	padding-left: 10px;
 	padding-right: 20px;
 	border-right: 1px dotted grey;
+	max-width: 30px !important;
 }
 
 .code-view .lineno {
@@ -29,11 +31,11 @@ body {
 }
 
 .code-view tr.red {
-	background-color: #992222;
+	background-color: #ff7979;
 }
 
-.code-view tr.red {
-	background-color: #229922;
+.code-view tr.green {
+	background-color: #a3ffa3;
 }
 
 .code-view .code {

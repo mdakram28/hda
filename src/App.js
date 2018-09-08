@@ -23,9 +23,10 @@ import SimpleLineChart from "./SimpleLineChart";
 import Button from "@material-ui/core/Button";
 //import CodeView from './CodeView';
 // import Websocket from "react-websocket";
-import CodeView from "./codeviewer/CodeView";
+import LiveCodeView from "./codeviewer/LiveCodeView";
 
 import { fetchFiles, fetchSources } from "./fetchfiles";
+import TimelineCodeView from "./codeviewer/TimelineCodeView";
 
 const drawerWidth = 240;
 
@@ -241,7 +242,8 @@ class App extends React.Component {
             <Typography component="div" className={classes.chartContainer}>
               <SimpleLineChart />
             </Typography>
-              <CodeView file={this.state.selected_file} />
+			  <LiveCodeView file={this.state.selected_file} />
+			  <TimelineCodeView file={this.state.selected_file} />
             <Typography variant="display1" gutterBottom>
               Lines of Code Executed
             </Typography>

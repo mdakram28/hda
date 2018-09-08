@@ -11,22 +11,28 @@ class TimelineCodeView extends React.Component {
       lines: []
     },
     timeline: {},
-    timelineLength: 0,
+    timelineKeys: [],
     value: 0
   };
 
   getTimeline() {
     fetchTimeline(this.props.file).then(res => {
-      this.setState({ timeline: res , timelineKeys: Object.keys(res)});
+		console.log(res);
+      this.setState({ timeline: res, timelineKeys: Object.keys(res) });
     });
   }
 
   handleChange(event, value) {
-	  this.state.data = this.state.timeline[this.state.timelineKeys[value]];
+	  console.log("timeline...", this.state.timeline[this.state.timelineKeys[value]]);
+    this.setState({
+      value: value,
+      data: this.state.timeline[this.state.timelineKeys[value]]
+    });
   }
 
   constructor(props) {
-    super(props); // file
+	super(props); // file
+	this.handleChange = this.handleChange.bind(this);
     this.getTimeline();
   }
 
@@ -34,13 +40,13 @@ class TimelineCodeView extends React.Component {
     return (
       <div>
         <Slider
-          value={value}
+          value={this.state.value}
           min={0}
-          max={this.state.timelineKeys.length-1}
+          max={this.state.timelineKeys.length - 1}
           step={1}
           onChange={this.handleChange}
         />
-		At time : {this.state.timelineKeys[value]}
+        At time : {this.state.timelineKeys[this.state.value]}
         <CodeView stats={this.state.data} />
       </div>
     );

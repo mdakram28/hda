@@ -23,7 +23,6 @@ class LiveCodeView extends React.Component {
   on_wsmessage(message) {
     var data = JSON.parse(message.data);
     if (data.source == this.props.file) {
-      console.log(data);
       this.setState({ data: data });
     }
   }
