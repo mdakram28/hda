@@ -20,6 +20,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import SimpleLineChart from './SimpleLineChart';
 import Button from '@material-ui/core/Button';
+import CodeView from './CodeView';
 const drawerWidth = 240;
 
 const styles = theme => ({
@@ -218,9 +219,9 @@ class App extends React.Component {
             <Typography variant="display1" gutterBottom>
               Lines of Code Executed
             </Typography>
-            {/* <div className={classes.tableContainer}>
-              <SimpleTable />
-            </div> */}
+             <div className={classes.tableContainer}>
+              <CodeView />
+            </div> 
           </main>
         </div>
       </React.Fragment>
