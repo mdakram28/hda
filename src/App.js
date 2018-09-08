@@ -1,4 +1,5 @@
 import React from 'react';
+import Text from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
@@ -107,9 +108,14 @@ const styles = theme => ({
 
 class App extends React.Component {
   state = {
-    open: true,
-    CodeView:"Hello"
-  };
+    open: true, 
+  }
+  ;
+  constructor(props) {
+    super(props);
+    this.state = {CodeView:"Hello world"};
+  }
+
 
   handleDrawerOpen = () => {
     this.setState({ open: true });
@@ -230,7 +236,7 @@ class App extends React.Component {
              <div className={classes.tableContainer}>
              <Websocket url='ws://localhost:8888/live/product/12345/'
               onMessage={this.handleCode.bind(this)}/>
-                <p>My mother has <span style="color:blue;font-weight:bold">blue</span> {this.CodeView} <span style="color:darkolivegreen;font-weight:bold">dark green</span> eyes.</p>
+             <pre>{this.state.CodeView}</pre>
 
             </div> 
           </main>
