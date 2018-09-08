@@ -38,6 +38,10 @@ class TimelineCodeView extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.getTimeline();
   }
+  // this.setState({
+  //   percent: value,
+  //   color: colorMap[parseInt(Math.random() * 3, 10)],
+  // });
 
   render() {
     var date = new Date(parseInt(this.state.timelineKeys[this.state.value]));
