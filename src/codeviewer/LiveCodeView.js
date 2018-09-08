@@ -1,12 +1,16 @@
 import React from "react";
 import { Style } from "react";
 import CodeView from "./CodeView";
+import { Line } from 'rc-progress';
+
 
 class LiveCodeView extends React.Component {
   state = {
     data: {
       lines: []
-    }
+    },
+    percent: 0,
+    color: '#3FC7FA',
   };
 
   on_wsopen() {
@@ -18,7 +22,7 @@ class LiveCodeView extends React.Component {
     );
   }
 
-  on_wsclose() {}
+  on_wsclose() { }
 
   on_wsmessage(message) {
     var data = JSON.parse(message.data);
@@ -34,11 +38,18 @@ class LiveCodeView extends React.Component {
     this.ws.onclose = this.on_wsclose.bind(this);
     this.ws.onmessage = this.on_wsmessage.bind(this);
   }
+  // this.setState({
+  //   percent: value,
+  //   color: colorMap[parseInt(Math.random() * 3, 10)],
+  // });
 
   render() {
     return (
       <div>
-		{/* Live Code View controls */}
+        <div style={containerStyle}>
+          <Line percent={this.state.percent} strokeWidth="4" strokeColor={this.state.color} />
+        </div>
+        {/* Live Code View controls */}
         <CodeView stats={this.state.data} />
       </div>
     );
