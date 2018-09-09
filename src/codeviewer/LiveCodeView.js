@@ -45,10 +45,6 @@ class LiveCodeView extends React.Component {
     this.ws.onclose = this.on_wsclose.bind(this);
     this.ws.onmessage = this.on_wsmessage.bind(this);
   }
-  // this.setState({
-  //   percent: value,
-  //   color: colorMap[parseInt(Math.random() * 3, 10)],
-  // });
 
   render() {
 	  const containerStyle = {
