@@ -8,27 +8,30 @@ import Moment from "moment";
 
 class TimelineCodeView extends React.Component {
   state = {
-    data: {
-      lines: []
-    },
+    data: null,
     timeline: {},
     timelineKeys: [],
-    value: 0
+    value: 0,
+    percent: 50,
+    color: "#3FC7FA"
   };
 
   getTimeline() {
     fetchTimeline(this.props.file).then(res => {
-      console.log(res);
+      //   console.log(res);
       this.setState({ timeline: res, timelineKeys: Object.keys(res) });
+      this.handleChange(null, this.state.timelineKeys.length - 1);
     });
   }
 
   handleChange(event, value) {
     //   console.log("timeline...", this.state.timeline[this.state.timelineKeys[value]]);
-    this.setState({
-      value: value,
-      data: this.state.timeline[this.state.timelineKeys[value]]
-    });
+    try {
+      this.setState({
+        value: value,
+        data: this.state.timeline[this.state.timelineKeys[value]]
+      });
+    } catch (err) {}
   }
 
   constructor(props) {
@@ -36,13 +39,12 @@ class TimelineCodeView extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.getTimeline();
   }
-  // this.setState({
-  //   percent: value,
-  //   color: colorMap[parseInt(Math.random() * 3, 10)],
-  // });
 
   render() {
     var date = new Date(parseInt(this.state.timelineKeys[this.state.value]));
+    const containerStyle = {
+      width: "250px"
+    };
     return (
       <div>
         <Slider
@@ -51,9 +53,13 @@ class TimelineCodeView extends React.Component {
           max={this.state.timelineKeys.length - 1}
           step={1}
           onChange={this.handleChange}
+          //   style={{position: "fixed"}}
         />
         Time : {Moment(date).format("YYYY-MM-ddd HH:mm:ss.SSS")}
-        <CodeView stats={this.state.data} />
+        <hr />
+        <div>
+          <CodeView stats={this.state.data} />
+        </div>
       </div>
     );
   }

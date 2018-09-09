@@ -29,6 +29,15 @@ class LiveCodeView extends React.Component {
     }
   }
 
+  componentWillReceiveProps(nextProps) {
+	this.ws.send(
+		JSON.stringify({
+		  type: "register",
+		  filename: nextProps.file
+		})
+	  );
+  }
+
   constructor(props) {
     super(props);
     this.ws = new WebSocket("ws://localhost:3001/");
@@ -47,9 +56,6 @@ class LiveCodeView extends React.Component {
 	  }
     return (
       <div>
-        <div style={containerStyle}>
-          <Line percent={this.state.percent} strokeWidth="4" strokeColor={this.state.color} />
-        </div>
         {/* Live Code View controls */}
         <CodeView stats={this.state.data} />
       </div>

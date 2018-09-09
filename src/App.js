@@ -19,8 +19,9 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import DashboardIcon from "@material-ui/icons/Dashboard";
-import SimpleLineChart from "./SimpleLineChart";
+import MemoryGraph from "./graphs/MemoryGraph";
 import Button from "@material-ui/core/Button";
+import { Tabs, Tab, Paper } from "@material-ui/core";
 //import CodeView from './CodeView';
 // import Websocket from "react-websocket";
 import LiveCodeView from "./codeviewer/LiveCodeView";
@@ -116,7 +117,8 @@ class App extends React.Component {
     file_list: [],
     CodeView: "Hello world",
     divState: true,
-    selected_file: "fib.c"
+    selected_file: "fib.c",
+    tabValue: 0
   };
 
   getAllData() {
@@ -124,17 +126,18 @@ class App extends React.Component {
     fetchFiles("")
       .then(files => {
         var new_file_list = [];
-        files.forEach(file =>
+        files.forEach(file => {
           new_file_list.push(
-            <ListItem button key={file}>
-              <ListItemIcon onClick={()=>this.setState({selected_file: file})}>
+            <ListItem button key={file}
+			onClick={() => this.setState({ selected_file: file })}>
+              <ListItemIcon>
                 <DashboardIcon />
               </ListItemIcon>
               <ListItemText primary={file} />
             </ListItem>
-          )
+          )}
         );
-        this.setState({ file_list: new_file_list });
+        this.setState({ file_list: new_file_list, selected_file:  files[0]});
       })
       .catch(err => console.error(err));
   }
@@ -142,6 +145,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.getAllData();
+    this.changeTab = this.changeTab.bind(this);
   }
 
   handleDrawerOpen = () => {
@@ -156,6 +160,7 @@ class App extends React.Component {
     let result = JSON.parse(code);
     this.setState({ CodeView: code });
   }
+
   display() {
     alert("Will be done soon");
   }
@@ -165,9 +170,14 @@ class App extends React.Component {
     else this.setState({ divState: true });
   }
 
+  changeTab(event, tabValue) {
+    console.log(tabValue);
+    this.setState({ tabValue: tabValue });
+  }
+
   render() {
     const { classes } = this.props;
-
+    const { tabValue } = this.state;
     return (
       <React.Fragment>
         <CssBaseline />
@@ -179,7 +189,8 @@ class App extends React.Component {
               this.state.open && classes.appBarShift
             )}>
             <Toolbar
-              disableGutters={!this.state.open}id
+              disableGutters={!this.state.open}
+              id
               className={classes.toolbar}>
               <IconButton
                 color="inherit"
@@ -191,6 +202,7 @@ class App extends React.Component {
                 )}>
                 <MenuIcon />
               </IconButton>
+
               {/* <Typography variant="title" color="inherit" noWrap className={classes.title}>
                 Basic
               </Typography> */}
@@ -219,34 +231,42 @@ class App extends React.Component {
           </Drawer>
           <main className={classes.content}>
             <div className={classes.appBarSpacer} />
-            <Typography variant="display1" gutterRight>
-              <Button
-                variant="contained"
-                color="primary"
-                className={classes.button}>
-                CodeView
-              </Button>
-              <Button
-                variant="contained"
-                color="primary"
-                className={classes.button}>
-                Memory UsageS
-              </Button>
-              <Button
-                variant="contained"
-                color="primary"
-                className={classes.button}>
-                Overview
-              </Button>
-            </Typography>
-            <Typography component="div" className={classes.chartContainer}>
-              <SimpleLineChart />
-            </Typography>
-			  <LiveCodeView file={this.state.selected_file} />
-			  {/* <TimelineCodeView file={this.state.selected_file} /> */}
-            <Typography variant="display1" gutterBottom>
-              Lines of Code Executed
-            </Typography>
+
+            <Paper className={classes.root}>
+              <Tabs
+                style={{ float: "right" }}
+                value={tabValue}
+                onChange={this.changeTab}>
+                <Tab label="Live Code View" />
+                <Tab label="Code Timeline" />
+                <Tab label="Resource Usage" />
+              </Tabs>
+            </Paper>
+			{this.state.selected_file}
+            {tabValue === 0 && (
+              <Paper className={classes.root} className={"tab-container"} elevation={1}>
+                <Typography variant="headline" component="h3">
+                  LIVE CODE VIEW EXECUTION TRACE
+                </Typography>
+				<LiveCodeView file={this.state.selected_file} />
+              </Paper>
+			)}
+			{tabValue === 1 && (
+              <Paper className={classes.root} className={"tab-container"} elevation={1}>
+                <Typography variant="headline" component="h3">
+                  TIME TRAVEL
+                </Typography>
+				<TimelineCodeView file={this.state.selected_file} />
+              </Paper>
+			)}
+			{tabValue === 2 && (
+              <Paper className={classes.root} className={"tab-container"} elevation={1}>
+                <Typography variant="headline" component="h3">
+                  RESOURCE GRAPHS
+                </Typography>
+				<MemoryGraph file={this.state.selected_file} />
+              </Paper>
+            )}
           </main>
         </div>
       </React.Fragment>

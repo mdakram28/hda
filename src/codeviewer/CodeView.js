@@ -1,9 +1,9 @@
 import React from "react";
 import { Style } from "react";
-import {Line} from "rc-progress";
+import { Line } from "rc-progress";
+import Typography from '@material-ui/core/Typography';
 
 class CodeView extends React.Component {
-
   format_count(count) {
     if (count == "-") count = "";
     else if (count == "#####") {
@@ -23,19 +23,18 @@ class CodeView extends React.Component {
 
   render() {
     if (!this.props.stats) return <span>Loading...</span>;
-    const containerStyle = {
-      width: "250px"
-	};	
-	console.log(this.props.stats, this.props.stats.source);
+    console.log(this.props.stats, this.props.stats.source);
     return (
       <div>
-        <div style={containerStyle}>
-          <Line
-            percent={this.props.stats.progress[this.props.stats.source].percent}
-            strokeWidth="4"
-            strokeColor={"#3FC7FA"}
-          />
-        </div>
+        <Typography variant="headline" gutterBottom>
+          {this.props.stats.source} - {this.props.stats.progress[this.props.stats.source].percent}%
+        </Typography>
+        <Line
+          percent={this.props.stats.progress[this.props.stats.source].percent}
+          strokeWidth="1"
+          strokeColor={"#3FC7FA"}
+          style={{ width: "100%" }}
+        />
         <table class="code-view" cellspacing="0">
           <tr>
             <th class="lineno" col>
@@ -49,7 +48,7 @@ class CodeView extends React.Component {
               className={
                 line.count == "#####"
                   ? "red"
-                  : line.code.trim() == ""
+                  : line.count == "-"
                     ? ""
                     : "green"
               }>

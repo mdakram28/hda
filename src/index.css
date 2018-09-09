@@ -9,7 +9,6 @@ body {
 }
 
 .code-view {
-	margin: 20px;
 	width: 100%;
 }
 
@@ -45,4 +44,8 @@ body {
 
 .code-view th {
 	border-bottom:  1px dotted grey;
+}
+
+.tab-container {
+	padding: 50px;
 }
