@@ -1,4 +1,5 @@
 # HoneyWell Software Assistant
+![alt text](https://raw.githubusercontent.com/mdakram28/hda/master/logo.png)
 The assistant has three modules or subparts:<br/>
 * React Web Application
 * Backend Server(Built on Nodejs)
@@ -50,11 +51,8 @@ They are preconfigured and hidden so that you can focus on the code
 **You’ll need to have Node >= 6 on your local development machine** (but it’s not required on the server). You can use [nvm](https://github.com/creationix/nvm#installation) (macOS/Linux) or [nvm-windows](https://github.com/coreybutler/nvm-windows#node-version-manager-nvm-for-windows) to easily switch Node versions between different projects.
 
 
-```sh
-cd hda
-```
 
-Inside the newly created project, you can run some built-in commands which are mentioned below to run the project
+Change the directory to go inside assistant project, you can run some built-in commands which are mentioned below to run the project
 
 #### `npm start` or `yarn start`
 
