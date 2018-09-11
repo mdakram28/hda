@@ -4,6 +4,10 @@ The assistant has three modules or subparts:<br/>
 * Backend Server(Built on Nodejs)
 * "logger.h" header file
 
+The Softwares Required for running the assistant on your machine are 
+* Nodejs
+* React
+
 ### Installation of Node 
 
 ```sh
@@ -41,7 +45,7 @@ When you’re ready to deploy to production, create a minified bundle with `npm 
 You **don’t** need to install or configure tools like Webpack or Babel.<br>
 They are preconfigured and hidden so that you can focus on the code
 
-#### Creating an App
+#### Running the Assistant
 
 **You’ll need to have Node >= 6 on your local development machine** (but it’s not required on the server). You can use [nvm](https://github.com/creationix/nvm#installation) (macOS/Linux) or [nvm-windows](https://github.com/coreybutler/nvm-windows#node-version-manager-nvm-for-windows) to easily switch Node versions between different projects.
 
@@ -50,7 +54,7 @@ They are preconfigured and hidden so that you can focus on the code
 cd hda
 ```
 
-Inside the newly created project, you can run some built-in commands:
+Inside the newly created project, you can run some built-in commands which are mentioned below to run the project
 
 #### `npm start` or `yarn start`
 
