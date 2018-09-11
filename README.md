@@ -10,12 +10,14 @@ The assistant has three modules or subparts:<br/>
 ```sh
 $ sudo apt-get update
 $ sudo apt-get install nodejs
+
 ```
 <br/>
 If the package in the repositories suits your needs, this is all you need to do to get set up with Node.js. In most cases, you'll also want to also install npm, which is the Node.js package manager. You can do this by typing:
 <br/>
 ```sh
 $ sudo apt-get install npm
+
 ```
 ### Installing React Framework on the machine
 <br/>
