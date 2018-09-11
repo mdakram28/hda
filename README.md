@@ -1,5 +1,7 @@
 # HoneyWell Software Assistant
 ![alt text](logo.png)
+<br/>
+<br/>
 The assistant has three modules or subparts:<br/>
 * React Web Application
 * Backend Server(Built on Nodejs)
