@@ -6,22 +6,13 @@ The assistant has three modules or subparts:<br/>
 
 <br/>
 ### Installing React Framework on the machine
-#### Create React App [![Build Status](https://travis-ci.org/facebook/create-react-app.svg?branch=master)](https://travis-ci.org/facebook/create-react-app)
-
-Create React apps with no build configuration.
-
-* [Creating an App](#creating-an-app) – How to create a new app.
-* [User Guide](https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md) – How to develop apps bootstrapped with Create React App.
-
-Create React App works on macOS, Windows, and Linux.<br>
-If something doesn’t work, please [file an issue](https://github.com/facebook/create-react-app/issues/new).
+<br/>
 
 #### Quick Overview
 
 ```sh
-npx create-react-app my-app
-cd my-app
-npm start
+npm  install create-react-app //For linux based systems
+
 ```
 
 *([npx](https://medium.com/@maybekatz/introducing-npx-an-npm-package-runner-55f7d4bd282b) comes with npm 5.2+ and higher, see [instructions for older npm versions](https://gist.github.com/gaearon/4064d3c23a77c74a3614c498a8bb1c5f))*
@@ -44,55 +35,6 @@ Just create a project, and you’re good to go.
 
 **You’ll need to have Node >= 6 on your local development machine** (but it’s not required on the server). You can use [nvm](https://github.com/creationix/nvm#installation) (macOS/Linux) or [nvm-windows](https://github.com/coreybutler/nvm-windows#node-version-manager-nvm-for-windows) to easily switch Node versions between different projects.
 
-To create a new app, you may choose one of the following methods:
-
-#### npx
-
-```sh
-npx create-react-app my-app
-```
-
-*([npx](https://medium.com/@maybekatz/introducing-npx-an-npm-package-runner-55f7d4bd282b) comes with npm 5.2+ and higher, see [instructions for older npm versions](https://gist.github.com/gaearon/4064d3c23a77c74a3614c498a8bb1c5f))*
-
-#### npm
-
-```sh
-npm init react-app my-app
-```
-*`npm init <initializer>` is available in npm 6+*
-
-#### Yarn
-
-```sh
-yarn create react-app my-app
-```
-*`yarn create` is available in Yarn 0.25+*
-
-It will create a directory called `my-app` inside the current folder.<br>
-Inside that directory, it will generate the initial project structure and install the transitive dependencies:
-
-```
-my-app
-├── README.md
-├── node_modules
-├── package.json
-├── .gitignore
-├── public
-│   ├── favicon.ico
-│   ├── index.html
-│   └── manifest.json
-└── src
-    ├── App.css
-    ├── App.js
-    ├── App.test.js
-    ├── index.css
-    ├── index.js
-    ├── logo.svg
-    └── registerServiceWorker.js
-```
-
-No configuration or complicated folder structures, just the files you need to build your app.<br>
-Once the installation is done, you can open your project folder:
 
 ```sh
 cd my-app
@@ -111,22 +53,5 @@ You will see the build errors and lint warnings in the console.
 <p align='center'>
 <img src='https://cdn.rawgit.com/marionebl/create-react-app/9f62826/screencast-error.svg' width='600' alt='Build errors'>
 </p>
-
-#### `npm test` or `yarn test`
-
-Runs the test watcher in an interactive mode.<br>
-By default, runs tests related to files changed since the last commit.
-
-[Read more about testing.](https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#running-tests)
-
-### `npm run build` or `yarn build`
-
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br>
-By default, it also [includes a service worker](https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#making-a-progressive-web-app) so that your app loads from local cache on future visits.
-
-Your app is ready to be deployed.
 
 
