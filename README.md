@@ -1,6 +1,7 @@
-# HoneyWell Software Assistant
+
 ![alt text](logo.png)
 <br/>
+# HoneyWell Software Assistant
 <br/>
 The assistant has three modules or subparts:<br/>
 * React Web Application
@@ -68,4 +69,9 @@ You will see the build errors and lint warnings in the console.
 <img src='https://cdn.rawgit.com/marionebl/create-react-app/9f62826/screencast-error.svg' width='600' alt='Build errors'>
 </p>
 
+### setting up the Raspberry-pi
+
+- Download Raspian image : [raspian image]https://www.raspberrypi.org/downloads/
+- Make a copy to your local raspberry-pi
+- Enable ssh on your raspberry-pi
 
