@@ -71,7 +71,7 @@ You will see the build errors and lint warnings in the console.
 
 ### setting up the Raspberry-pi
 
-- Download Raspian image : [raspian image]https://www.raspberrypi.org/downloads/
+- Download Raspian image : [raspian image](https://www.raspberrypi.org/downloads/)
 - Make a copy to your local raspberry-pi
 - Enable ssh on your raspberry-pi
 
