@@ -1,281 +1,79 @@
 import React from "react";
-import Text from "react";
 import PropTypes from "prop-types";
-import classNames from "classnames";
 import { withStyles } from "@material-ui/core/styles";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import Drawer from "@material-ui/core/Drawer";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import List from "@material-ui/core/List";
 import Typography from "@material-ui/core/Typography";
-import Divider from "@material-ui/core/Divider";
-import IconButton from "@material-ui/core/IconButton";
-//import Badge from '@material-ui/core/Badge';
-import MenuIcon from "@material-ui/icons/Menu";
-import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
-//import NotificationsIcon from '@material-ui/icons/Notifications';
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
-import DashboardIcon from "@material-ui/icons/Dashboard";
-import MemoryGraph from "./graphs/MemoryGraph";
-import Button from "@material-ui/core/Button";
-import { Tabs, Tab, Paper } from "@material-ui/core";
-//import CodeView from './CodeView';
-// import Websocket from "react-websocket";
-import LiveCodeView from "./codeviewer/LiveCodeView";
 
-import { fetchFiles, fetchSources } from "./fetchfiles";
-import TimelineCodeView from "./codeviewer/TimelineCodeView";
+import Sidebar from "./components/Sidebar";
+import MyAppbar from "./components/MyAppbar";
+import ProcessViewer from "./codeviewer/ProcessViewer";
 
 const drawerWidth = 240;
 
 const styles = theme => ({
-  root: {
-    display: "flex"
-  },
-  toolbar: {
-    paddingRight: 24 // keep right padding when drawer closed
-  },
-  toolbarIcon: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "flex-end",
-    padding: "0 8px",
-    ...theme.mixins.toolbar
-  },
-  appBar: {
-    zIndex: theme.zIndex.drawer + 1,
-    transition: theme.transitions.create(["width", "margin"], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen
-    })
-  },
-  button: {
-    margin: theme.spacing.unit
-  },
-  input: {
-    display: "none"
-  },
-  appBarShift: {
-    marginLeft: drawerWidth,
-    width: `calc(100% - ${drawerWidth}px)`,
-    transition: theme.transitions.create(["width", "margin"], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen
-    })
-  },
-  menuButton: {
-    marginLeft: 12,
-    marginRight: 36
-  },
-  menuButtonHidden: {
-    display: "none"
-  },
-  title: {
-    flexGrow: 1
-  },
-  drawerPaper: {
-    position: "relative",
-    whiteSpace: "nowrap",
-    width: drawerWidth,
-    transition: theme.transitions.create("width", {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen
-    })
-  },
-  drawerPaperClose: {
-    overflowX: "hidden",
-    transition: theme.transitions.create("width", {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen
-    }),
-    width: theme.spacing.unit * 7,
-    [theme.breakpoints.up("sm")]: {
-      width: theme.spacing.unit * 9
-    }
-  },
-  appBarSpacer: theme.mixins.toolbar,
-  content: {
-    flexGrow: 1,
-    padding: theme.spacing.unit * 3,
-    height: "100vh",
-    overflow: "auto"
-  },
-  chartContainer: {
-    marginLeft: -22
-  },
-  tableContainer: {
-    height: 320
-  }
+    root: {
+        flexGrow: 1,
+        zIndex: 1,
+        overflow: "hidden",
+        position: "relative",
+        display: "flex"
+    },
+    content: {
+        flexGrow: 1,
+        padding: theme.spacing.unit * 3,
+        height: "100vh",
+        overflow: "auto"
+    },
+    appBarSpacer: theme.mixins.toolbar
 });
 
 class App extends React.Component {
-  state = {
-    open: true,
-    file_list: [],
-    CodeView: "Hello world",
-    divState: true,
-    selected_file: "fib.c",
-    tabValue: 0
-  };
+    state = {
+        source: null,
+        selectedProcess: null,
+        selectedFile: null
+    };
 
-  getAllData() {
-    console.log("sdfdsfdsf");
-    fetchFiles("")
-      .then(files => {
-        var new_file_list = [];
-        files.forEach(file => {
-          new_file_list.push(
-            <ListItem button key={file}
-			onClick={() => this.setState({ selected_file: file })}>
-              <ListItemIcon>
-                <DashboardIcon />
-              </ListItemIcon>
-              <ListItemText primary={file} />
-            </ListItem>
-          )}
+    constructor(props) {
+        super(props);
+    }
+
+    handleSourceChange = newSource => {
+        this.setState({ source: newSource });
+    };
+
+    handleProcessChange = (runId) => {
+        this.setState({
+            selectedRunId: runId
+        });
+    };
+
+    render() {
+        const { classes } = this.props;
+        const { tabValue, selectedRunId } = this.state;
+        return (
+            <React.Fragment>
+                <div className={classes.root}>
+                    <MyAppbar onSourceChange={this.handleSourceChange} />
+
+                    <Sidebar
+                        source={this.state.source}
+                        onProcessChange={this.handleProcessChange}
+                    />
+
+                    <main className={classes.content}>
+                        <div className={classes.appBarSpacer} />
+                        <ProcessViewer
+                            runId={selectedRunId}
+                        />
+                    </main>
+                </div>
+            </React.Fragment>
         );
-        this.setState({ file_list: new_file_list, selected_file:  files[0]});
-      })
-      .catch(err => console.error(err));
-  }
-
-  constructor(props) {
-    super(props);
-    this.getAllData();
-    this.changeTab = this.changeTab.bind(this);
-  }
-
-  handleDrawerOpen = () => {
-    this.setState({ open: true });
-  };
-
-  handleDrawerClose = () => {
-    this.setState({ open: false });
-  };
-
-  handleCode(code) {
-    let result = JSON.parse(code);
-    this.setState({ CodeView: code });
-  }
-
-  display() {
-    alert("Will be done soon");
-  }
-
-  changeView() {
-    if (this.state == true) this.setState({ divState: false });
-    else this.setState({ divState: true });
-  }
-
-  changeTab(event, tabValue) {
-    console.log(tabValue);
-    this.setState({ tabValue: tabValue });
-  }
-
-  render() {
-    const { classes } = this.props;
-    const { tabValue } = this.state;
-    return (
-      <React.Fragment>
-        <CssBaseline />
-        <div className={classes.root}>
-          <AppBar
-            position="absolute"
-            className={classNames(
-              classes.appBar,
-              this.state.open && classes.appBarShift
-            )}>
-            <Toolbar
-              disableGutters={!this.state.open}
-              id
-              className={classes.toolbar}>
-              <IconButton
-                color="inherit"
-                aria-label="Open drawer"
-                onClick={this.handleDrawerOpen}
-                className={classNames(
-                  classes.menuButton,
-                  this.state.open && classes.menuButtonHidden
-                )}>
-                <MenuIcon />
-              </IconButton>
-
-              {/* <Typography variant="title" color="inherit" noWrap className={classes.title}>
-                Basic
-              </Typography> */}
-              <div />
-            </Toolbar>
-          </AppBar>
-          <Drawer
-            variant="permanent"
-            classes={{
-              paper: classNames(
-                classes.drawerPaper,
-                !this.state.open && classes.drawerPaperClose
-              )
-            }}
-            open={this.state.open}>
-            <div className={classes.toolbarIcon}>
-              <IconButton onClick={this.handleDrawerClose}>
-                <ChevronLeftIcon />
-              </IconButton>
-            </div>
-            <Divider />
-            <List>{this.state.file_list}</List>
-            {/* <List>{mainListItems}</List> */}
-            <Divider />
-            {/* <List>{secondaryListItems}</List> */}
-          </Drawer>
-          <main className={classes.content}>
-            <div className={classes.appBarSpacer} />
-
-            <Paper className={classes.root}>
-              <Tabs
-                style={{ float: "right" }}
-                value={tabValue}
-                onChange={this.changeTab}>
-                <Tab label="Live Code View" />
-                <Tab label="Code Timeline" />
-                <Tab label="Resource Usage" />
-              </Tabs>
-            </Paper>
-			{this.state.selected_file}
-            {tabValue === 0 && (
-              <Paper className={classes.root} className={"tab-container"} elevation={1}>
-                <Typography variant="headline" component="h3">
-                  LIVE CODE VIEW EXECUTION TRACE
-                </Typography>
-				<LiveCodeView file={this.state.selected_file} />
-              </Paper>
-			)}
-			{tabValue === 1 && (
-              <Paper className={classes.root} className={"tab-container"} elevation={1}>
-                <Typography variant="headline" component="h3">
-                  TIME TRAVEL
-                </Typography>
-				<TimelineCodeView file={this.state.selected_file} />
-              </Paper>
-			)}
-			{tabValue === 2 && (
-              <Paper className={classes.root} className={"tab-container"} elevation={1}>
-                <Typography variant="headline" component="h3">
-                  RESOURCE GRAPHS
-                </Typography>
-				<MemoryGraph file={this.state.selected_file} />
-              </Paper>
-            )}
-          </main>
-        </div>
-      </React.Fragment>
-    );
-  }
+    }
 }
 
 App.propTypes = {
-  classes: PropTypes.object.isRequired
+    classes: PropTypes.object.isRequired
 };
 
 export default withStyles(styles)(App);

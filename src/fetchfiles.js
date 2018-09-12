@@ -15,9 +15,8 @@ export function fetchFiles(source) {
 	});
 }
 
-export function fetchTimeline(file) {
-	if(file == "") file = "fib.c";
-	return fetch("http://localhost:3000/timeline?file="+encodeURIComponent(file))
+export function fetchTimeline(file,runId) {
+	return fetch("http://localhost:3000/timeline?file="+encodeURIComponent(file)+"&runId="+encodeURIComponent(runId))
 	.then(res => {
 		return res.json();
 	});
